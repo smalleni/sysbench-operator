@@ -1,0 +1,7 @@
+apiVersion: sysbench.example.com/v1alpha1
+kind: Sysbench
+metadata:
+  name: example-sysbench
+spec:
+  # Add fields here
+  size: 3

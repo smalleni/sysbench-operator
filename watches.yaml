@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: sysbench.example.com
+  kind: Sysbench
+  role: /opt/ansible/roles/sysbench
