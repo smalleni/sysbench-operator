@@ -4,6 +4,6 @@ metadata:
   name: example-sysbench
 spec:
   test: cpu
-    args:
-      cpu-max-prime: 2000
+  args:
+    cpu-max-prime: 2000
     
