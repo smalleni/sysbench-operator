@@ -3,5 +3,7 @@ kind: Sysbench
 metadata:
   name: example-sysbench
 spec:
-  # Add fields here
-  size: 3
+  test: cpu
+    args:
+      cpu-max-prime: 2000
+    

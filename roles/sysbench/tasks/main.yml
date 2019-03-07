@@ -1,2 +1,46 @@
 ---
 # tasks file for sysbench
+- name: template sysbench script
+  k8s:
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: '{{ meta.name }}-sysbench'
+        namespace: '{{ meta.namespace }}'
+      data:
+        sysbenchScript: "{{ lookup('template', 'sysbench.sh.j2') }}"
+  when: test is defined and test is not None
+
+- name: start sysbench
+  k8s:
+    definition:
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: '{{ meta.name }}-sysbench'
+        namespace: '{{ meta.namespace }}'
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: sysbench
+        template:
+          metadata:
+            labels:
+              app: sysbench
+          spec:
+            containers:
+            - name: sysbench
+              command: ["/tmp/sysbench.sh"]             
+              image: "docker.io/smalleni/centos-sysbench:latest"
+              volumeMounts:
+              - name: sysbench-volume 
+                mountPath: "/tmp/sysbench.sh"
+          volumes:
+            - name: sysbench-volume
+              configMap:
+                name: '{{ meta.name }}-sysbench'
+                defaultMode: 0777
+  when: test is defined and test is not None 
+  
