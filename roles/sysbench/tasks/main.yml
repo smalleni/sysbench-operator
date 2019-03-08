@@ -10,7 +10,7 @@
         namespace: '{{ meta.namespace }}'
       data:
         sysbenchScript: "{{ lookup('template', 'sysbench.sh.j2') }}"
-  when: test is defined and test is not None
+  when: test is defined and test is not none
 
 - name: start sysbench
   k8s:
@@ -36,11 +36,11 @@
               image: "docker.io/smalleni/centos-sysbench:latest"
               volumeMounts:
               - name: sysbench-volume 
-                mountPath: "/tmp/sysbench.sh"
+                mountPath: "/tmp/"
           volumes:
             - name: sysbench-volume
               configMap:
                 name: '{{ meta.name }}-sysbench'
                 defaultMode: 0777
-  when: test is defined and test is not None 
+  when: test is defined and test is not none 
   

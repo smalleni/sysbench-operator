@@ -1,6 +1,6 @@
 ---
 # defaults file for sysbench
 test: cpu
-args:
+test-args:
   cpu-max-prime: 2000
 

@@ -1,3 +1,3 @@
 #!/bin/bash
-sysbench --test={{cpu}} {% for opt,value in args.iteritems() %} --{{opt}}={{value}} {% endfor %} run
+sysbench --test={{test}} {% for opt,value in args.iteritems() %} --{{opt}}={{value}} {% endfor %} run
 
